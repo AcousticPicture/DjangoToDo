@@ -1,37 +1,28 @@
 <h1>Django ToDo List</h1>
-<section>
-        <h2>Bestehende ToDos</h2>
+<section class="main">
+    <h2>Bestehende ToDos</h2>
+    <div>
         <ol>
             {% for entry in all_todos %}
                 <li>
-                    <div>{{entry.done|yesno:"Erledigt, Offen"}}</div>
-                    <div>{{entry.text}}</div>
-                    <div>{{entry.due_date}}</div>
-                    <div>{{entry.category}}</div>
+                    <div>
+                    {{entry.done|yesno:"Erledigt, Offen"}}
+                    {{entry.text}}
+                    {{entry.due_date}}
+                    {{entry.category_id.name}}
+                    <a href="{% url 'edit_task' entry.id %}">Bearbeiten</a>
+                    <!--a href="{% url 'delete_task' entry.id %}" data-confirm="Sicher?" data-method="delete" >Löschen</a-->
+                    <form action="{% url 'delete_task' entry.id %}" method="POST">
+                        {% csrf_token %}
+                        <input onclick="return confirm('Sicher?')" type="submit" value="Löschen"/>
+                    </form>
+                
+                </div>
                 </li>
             {% endfor %}
         </ol>
-    </section>
+    </div>
+</section>
 <section>
-        <h2>Neue Aufgabe hinzufügen</h2>
-        <form action ="" method="POST">
-            <div class="input">
-                {% csrf_token %}
-                <input type="text" id="text" placeholder="Neue Aufgabe..." name="text" required>
-            </div>
-            <div class="category">
-                <i class="fa fa-caret-down selectArrow"></i>
-                <select id="category" class="taskCategory" name="category_select">
-                    <option class="disabled" value="">Choose a category</option>
-                    <!--{% for category in all_categories %}
-                    <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
-                    {% endfor %}-->
-                </select>
-                <ul>
-                <!--{% for category in all_categories %}
-                <li>{{category.name}}</li>
-                {%endfor%}-->
-                </ul>
-            </div>
-        </form>
+    <a href="{% url 'new_task' %}">Eintrag hinzufügen</a>
 </section>
