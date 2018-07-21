@@ -1,0 +1,25 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Categories</h2>
+
+    <div>
+            {{categories}}
+        <ul>
+            {% for cat in categories %}
+                <li>{{cat.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <input type="submit" value="Absenden" />
+    </form>
+
+    <a href="{% url 'index' %}">Zurück</a>
+    {% endblock %}

@@ -1,6 +1,17 @@
-<h1>Django ToDo List</h1>
-<section class="main">
+
+{% extends "layout.html" %}
+
+{% block content %}
     <h2>Bestehende ToDos</h2>
+    <div>
+        <form action="" method="get">
+            {% csrf_token %}
+            <table>
+            {{ form }}
+            </table>
+            <input type="submit" value="Filtern" />
+        </form>
+    </div>
     <div>
         <ol>
             {% for entry in all_todos %}
@@ -16,13 +27,17 @@
                         {% csrf_token %}
                         <input onclick="return confirm('Sicher?')" type="submit" value="Löschen"/>
                     </form>
-                
+                    <form action="{% url 'finish_task' entry.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Erledigt"/>
+                    </form>
                 </div>
                 </li>
             {% endfor %}
         </ol>
     </div>
-</section>
-<section>
-    <a href="{% url 'new_task' %}">Eintrag hinzufügen</a>
-</section>
+    <section>
+        <a href="{% url 'new_task' %}">Eintrag hinzufügen</a>
+        <a href="{% url 'new_category' %}">Kategorie hinzufügen</a>
+    </section>
+{% endblock %}

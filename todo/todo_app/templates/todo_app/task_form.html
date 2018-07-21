@@ -1,4 +1,7 @@
-<h1>TODOS</h1>
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>TODOS</h2>
 
 <form action="" method="post">
     {% csrf_token %}
@@ -9,3 +12,4 @@
 </form>
 
 <a href="{% url 'index' %}">Zurück</a>
+{% endblock %}
