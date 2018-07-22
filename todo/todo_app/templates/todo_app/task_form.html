@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>TODOS</h2>
+<h2>Neue Aufgabe</h2>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form }}
-    </table>
-    <input type="submit" value="Absenden" />
-</form>
-
-<a href="{% url 'index' %}">Zurück</a>
+<div class="form">
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <button type="submit" title="Speichern" class=" submit glyphicon glyphicon-floppy-disk"></button>
+        
+    </form>
+    <a href="{% url 'index' %}" title="Verwerfen" class="back glyphicon glyphicon-remove"></a>
+</div>
 {% endblock %}

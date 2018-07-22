@@ -2,9 +2,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Categories</h2>
-
-    <div>
+    <div class="cats">
+        <h3>Vorhandene Kategorien</h3>
             {{categories}}
         <ul>
             {% for cat in categories %}
@@ -13,13 +12,16 @@
         </ul>
     </div>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        <table>
-        {{ form }}
-        </table>
-        <input type="submit" value="Absenden" />
-    </form>
+    <h2>Neue Kategorie</h2>
 
-    <a href="{% url 'index' %}">Zurück</a>
-    {% endblock %}
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+            {{ form }}
+            </table>
+            <button type="submit" title="Speichern" class=" submit glyphicon glyphicon-floppy-disk"></button>
+        </form>
+        <a href="{% url 'index' %}" title="Verwerfen" class="back glyphicon glyphicon-remove"></a>
+    </div>
+{% endblock %}

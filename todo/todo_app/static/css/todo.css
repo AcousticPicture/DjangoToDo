@@ -1,0 +1,191 @@
+.content{
+    /*background-image: url("../imgs/background.jpg");*/
+    margin: 1%;
+    padding: 2%;
+    border: 2px solid #2c5305;
+}
+h1{ 
+    font-family: 'Comfortaa';
+    font-size: 4em;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-bottom: 5%;
+}
+.main{
+    width: 70%;
+    margin: 0 auto;
+}
+.main a{
+    color: #2c5305;
+}
+.main a:hover{
+    color: #87947b;
+}
+h2{
+    margin: 2% auto;
+    text-align: center;
+    font-family: 'Comfortaa';
+}
+.filter{
+    margin-left: 5%;
+    width: 50%;
+    font-family: 'Comfortaa';
+    display: inline-block;
+    float: left;
+}
+.filter table{
+    display: inline;
+}
+.filter table td{
+    padding-left: 10;
+}
+.filter button{
+    display: inline;
+    font-size: 120%;
+}
+
+.addTaskCat{
+    width: 43%;
+    font-family: 'Comfortaa';
+    font-size: 150%;
+    display: inline-block;
+    text-align: right;
+}
+.addTaskCat a:hover{
+    text-decoration: none;
+}
+.addtask{
+    display: inline;
+    margin-right: 5%;
+}
+.addcat{
+    display: inline;
+}
+
+
+
+.entries{
+    display: block;
+}
+.todoentry{
+    margin: 2% auto;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 150%;
+    font-family: 'Indie Flower';
+}
+li {
+    list-style-type: none;
+}
+
+.donesign::before{
+    width: 100%;
+    margin-right: 10px;
+}
+.undone{
+    color: darkgrey;
+}
+.done{
+    color: #6bb000;
+}
+
+.task_text{
+    display: inline;
+}
+
+.taskbuttons{
+    display: block;
+    font-size: 80%;
+    float: right;
+}
+.taskbutton{
+    display: inline;
+}
+button[type=submit]{
+    background: none;
+    border: none;
+}
+.finishtask{
+    color: #6bb000;
+}
+.finishtask:hover{
+    color: #5c9700;
+}
+.reopentask{
+    color: gray;
+}
+.reopentask:hover{
+    color: #595959;
+}
+.deletetask:hover{
+    color:darkred;
+}
+
+.task_date{
+    font-size: 80%;
+    color: gray;
+    margin-left: 5%;
+    width: 85%;
+    display: inline-block;    
+}
+
+.task_category{
+    font-size: 70%;
+    display: inline-block;
+    text-align: right;
+    color: gray;
+    font-style: italic;
+}
+.task_category::before{
+    margin-right: 8px;
+    font-size: 80%;
+}
+
+
+
+/* Styling for forms */
+.form, .cats{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Comfortaa';
+}
+.form table{
+    width: 100%;
+}
+.form th{
+    display: block;
+    text-align: center;
+    font-size: 120%;
+    margin-top: 6%;
+}
+.form td{
+    display: block;
+    width: 100%;
+    font-family: 'Indie Flower';
+    text-align: center;
+}
+.form td input{
+    width: 100%;
+}
+.form td select{
+    width: 50%;
+    text-align: center;
+    font-size: 120%;
+}
+.submit{
+    margin-top: 10%;
+    font-size: 150%;
+}
+.submit:hover{
+    color: #5c9700;
+}
+.back{
+    font-size: 150%;
+}
+.back:hover{
+    color: darkred !important;
+    text-decoration: none;
+}

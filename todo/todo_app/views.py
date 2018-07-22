@@ -90,6 +90,14 @@ def finish_task(request, id):
     
     return redirect('index')
 
+def reopen_task(request, id):
+    if(request.method == 'POST'):
+        task = Entry.objects.get(id=id)
+        if task:
+            task.done = False
+            task.save()
+    return redirect('index')
+
 def new_category(request):
     if(request.method == 'POST'):
         form = CategoryForm(request.POST)

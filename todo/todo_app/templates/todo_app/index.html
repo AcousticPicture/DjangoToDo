@@ -3,41 +3,54 @@
 
 {% block content %}
     <h2>Bestehende ToDos</h2>
-    <div>
+    <div class="filter">
         <form action="" method="get">
             {% csrf_token %}
             <table>
             {{ form }}
             </table>
-            <input type="submit" value="Filtern" />
+            <button type="submit" value="Filtern" class="glyphicon glyphicon-refresh"></button>
         </form>
     </div>
-    <div>
-        <ol>
+    <section class="addTaskCat">
+            <a href="{% url 'new_task' %}" title= "Neuer Eintrag" class="addtask glyphicon glyphicon-plus-sign"></a>
+            <a href="{% url 'new_category' %}" title="Neue Kategorie" class ="addcat glyphicon glyphicon-tags"></a>
+    </section>
+    <div class="entries">
+        <ul>
             {% for entry in all_todos %}
-                <li>
+                <li class = "todoentry">
                     <div>
-                    {{entry.done|yesno:"Erledigt, Offen"}}
-                    {{entry.text}}
-                    {{entry.due_date}}
-                    {{entry.category_id.name}}
-                    <a href="{% url 'edit_task' entry.id %}">Bearbeiten</a>
-                    <!--a href="{% url 'delete_task' entry.id %}" data-confirm="Sicher?" data-method="delete" >Löschen</a-->
-                    <form action="{% url 'delete_task' entry.id %}" method="POST">
-                        {% csrf_token %}
-                        <input onclick="return confirm('Sicher?')" type="submit" value="Löschen"/>
-                    </form>
-                    <form action="{% url 'finish_task' entry.id %}" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="Erledigt"/>
-                    </form>
-                </div>
+                        {% if entry.done is False %}
+                            <span class="glyphicon glyphicon-ok-circle undone donesign"></span>
+                        {%else%}
+                            <span class="glyphicon glyphicon-ok-circle done donesign"></span>
+                        {%endif%}
+                        <div class = "task_text">{{entry.text}}</div>
+                        <section class="taskbuttons">
+                            {% if entry.done is False %}
+                            <form action="{% url 'finish_task' entry.id %}" method="POST" title="Als erledigt markieren" class="taskbutton">
+                                {% csrf_token %}
+                                <button type="submit" class="glyphicon glyphicon-ok finishtask"></button>
+                            </form>
+                            {%else%}
+                            <form action="{% url 'reopen_task' entry.id %}" method="POST" title="Als unerledigt markieren" class="taskbutton">
+                                {% csrf_token %}
+                                <button type="submit" class="glyphicon glyphicon-repeat reopentask"></button>
+                            </form>
+                            {%endif%}
+                            <!--a href="{% url 'delete_task' entry.id %}" data-confirm="Sicher?" data-method="delete" >Löschen</a-->
+                            <form action="{% url 'delete_task' entry.id %}" method="POST" class="taskbutton">
+                                {% csrf_token %}
+                                <button onclick="return confirm('Sicher?')" type="submit" title="Löschen" class="deletetask glyphicon glyphicon-trash"></button>
+                            </form>
+                            <a href="{% url 'edit_task' entry.id %}" title="Bearbeiten" class="taskbutton"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </section>
+                        <div class="task_date">{{entry.due_date}}</div>
+                        <div class="task_category glyphicon glyphicon-tags" title="Kategorie">{{entry.category_id.name}}</div>
+                    </div>
                 </li>
             {% endfor %}
         </ol>
     </div>
-    <section>
-        <a href="{% url 'new_task' %}">Eintrag hinzufügen</a>
-        <a href="{% url 'new_category' %}">Kategorie hinzufügen</a>
-    </section>
 {% endblock %}
