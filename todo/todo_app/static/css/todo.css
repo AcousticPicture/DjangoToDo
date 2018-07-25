@@ -4,6 +4,9 @@
     padding: 2%;
     border: 2px solid #2c5305;
 }
+.errorlist{
+    display: none;
+}
 h1{ 
     font-family: 'Comfortaa';
     font-size: 4em;
@@ -24,23 +27,24 @@ h1{
 }
 h2{
     margin: 2% auto;
+    margin-bottom: 5%;
     text-align: center;
     font-family: 'Comfortaa';
 }
-.filter{
+.sort{
     margin-left: 5%;
     width: 50%;
     font-family: 'Comfortaa';
     display: inline-block;
     float: left;
 }
-.filter table{
+.sort table{
     display: inline;
 }
-.filter table td{
+.sort table td{
     padding-left: 10;
 }
-.filter button{
+.sort button{
     display: inline;
     font-size: 120%;
 }
@@ -67,6 +71,7 @@ h2{
 
 .entries{
     display: block;
+    margin-top: 5%;
 }
 .todoentry{
     margin: 2% auto;
@@ -89,6 +94,9 @@ li {
 }
 .done{
     color: #6bb000;
+}
+.important{
+    color: #922;
 }
 
 .task_text{

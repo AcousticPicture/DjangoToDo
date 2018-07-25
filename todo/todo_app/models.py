@@ -9,4 +9,5 @@ class Entry(models.Model):
     text = models.CharField(max_length=2000)
     due_date = models.DateTimeField()
     done = models.BooleanField(default=False)
+    important = models.BooleanField(default=False)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)

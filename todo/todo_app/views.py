@@ -6,27 +6,38 @@ from django.template import loader
 from .models import Entry
 from .models import Category
 from .forms import TaskForm
-from .forms import FilterForm
+from .forms import SortForm
 from .forms import CategoryForm
 
 # Create your views here.
 
 def index(request):
-    if "filter" in request.GET:
-        filter = request.GET["filter"]
+    form = SortForm(request.GET)
+    print(request.GET)
+    if "filtern" in request.GET:
+        filt = int(request.GET["filtern"])
     else:
-        filter = False
+        filt = False
+    
 
-    form = FilterForm(request.GET)
-
-    if filter is "2":
-        all_todos = Entry.objects.order_by('due_date').all
-    elif filter is "3":
-        all_todos = Entry.objects.order_by('done').all
-    elif filter is "4":
-        all_todos = Entry.objects.order_by('category_id').all
+    if "sortieren" in request.GET:
+        sort = request.GET["sortieren"]
     else:
-        all_todos = Entry.objects.all
+        sort = False
+
+    if filt and filt <= Category.objects.count():
+        todo_to_show = Entry.objects.filter(category_id=filt)
+    else:
+        todo_to_show = Entry.objects
+
+    if sort is "2":
+        all_todos = todo_to_show.order_by('due_date').all
+    elif sort is "3":
+        all_todos = todo_to_show.order_by('done').all
+    elif sort is "4":
+        all_todos = todo_to_show.order_by('category_id').all
+    else:
+        all_todos = todo_to_show.all
 
     template = loader.get_template('todo_app/index.html')
     context = { 'all_todos': all_todos, 'form': form}
@@ -39,7 +50,7 @@ def new_task(request):
         form.is_valid()
         clean = form.cleaned_data
         cat = Category.objects.get(pk=clean['category_id'])
-        task = Entry(text=clean['content'], due_date=clean['due_date'], done=False, category_id=cat)
+        task = Entry(text=clean['content'], due_date=clean['due_date'], done=False, category_id=cat, important=clean['important'])
         task.save()
 
         return redirect('index')
@@ -60,6 +71,7 @@ def edit_task(request, id):
         task.text = clean['content']
         task.due_date = clean['due_date']
         task.category_id = cat
+        task.important = clean['important']
         task.save()
 
         return redirect('index')
@@ -67,7 +79,8 @@ def edit_task(request, id):
         initial = {
             'content': task.text,
             'due_date': task.due_date,
-            'category_id': task.category_id.id
+            'category_id': task.category_id.id,
+            'important' : task.important
         }
         template = loader.get_template('todo_app/task_form.html')
         form = TaskForm(initial=initial)

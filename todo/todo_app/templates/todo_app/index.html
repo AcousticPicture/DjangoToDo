@@ -3,13 +3,13 @@
 
 {% block content %}
     <h2>Bestehende ToDos</h2>
-    <div class="filter">
+    <div class="sort">
         <form action="" method="get">
             {% csrf_token %}
             <table>
             {{ form }}
             </table>
-            <button type="submit" value="Filtern" class="glyphicon glyphicon-refresh"></button>
+            <button type="submit" value="Sortieren" class="glyphicon glyphicon-refresh"></button>
         </form>
     </div>
     <section class="addTaskCat">
@@ -21,10 +21,12 @@
             {% for entry in all_todos %}
                 <li class = "todoentry">
                     <div>
-                        {% if entry.done is False %}
-                            <span class="glyphicon glyphicon-ok-circle undone donesign"></span>
-                        {%else%}
+                        {% if entry.done is True %}
                             <span class="glyphicon glyphicon-ok-circle done donesign"></span>
+                        {% elif entry.important is True%}
+                            <span class="glyphicon glyphicon-ok-circle important donesign"></span>
+                        {%else %}
+                            <span class="glyphicon glyphicon-ok-circle undone donesign"></span>
                         {%endif%}
                         <div class = "task_text">{{entry.text}}</div>
                         <section class="taskbuttons">
